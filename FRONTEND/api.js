@@ -21,7 +21,7 @@ const API_BASE_URL = (() => {
         return 'http://localhost:5000';
     }
     // Production: Set your Render backend URL here
-    return 'https://cyber-academy-api.onrender.com'; // ← CHANGE TO YOUR RENDER URL
+    return 'https://cyber-academy-3d23.onrender.com'; // ← CHANGE TO YOUR RENDER URL
 })();
 
 // ── Token Helpers ──────────────────────────────────────────────
@@ -294,4 +294,5 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isLoggedIn()) {
         syncDashboard();
     }
+
 });
