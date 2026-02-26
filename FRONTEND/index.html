@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CyberAcademy — Learn Cybersecurity</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ============================================
+     NAVIGATION
+============================================ -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="#home" class="nav-logo">
+      <span class="logo-bracket">[</span>CyberAcademy<span class="logo-bracket">]</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#modules">Modules</a></li>
+      <li><a href="#activities">Activities</a></li>
+      <li><a href="#dashboard">Dashboard</a></li>
+    </ul>
+    <div class="nav-auth">
+      <button class="btn-ghost" onclick="openModal('login')">Login</button>
+      <button class="btn-primary" onclick="openModal('signup')">Sign Up</button>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ============================================
+     SECTION 1: HERO / LANDING
+============================================ -->
+<section id="home" class="hero">
+  <!-- Animated grid background -->
+  <div class="hero-grid"></div>
+  <div class="scan-line"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="pulse-dot"></span>
+      <span class="mono">LIVE PLATFORM — COLLEGE EDITION 2025</span>
+    </div>
+    <h1 class="hero-title">
+      Learn Cybersecurity<br/>
+      <span class="glitch-text" data-text="Through Activities">Through Activities</span>
+    </h1>
+    <p class="hero-tagline">
+      Hands-on simulations, real-world scenarios, and structured learning paths
+      designed for college students entering the world of digital security.
+    </p>
+    <div class="hero-cta">
+      <a href="#modules" class="btn-primary btn-large">
+        <span>Explore Modules</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#activities" class="btn-outline btn-large">Get Started</a>
+    </div>
+
+    <!-- Live stats ticker -->
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num mono">2,847</span>
+        <span class="stat-label">Students Enrolled</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-num mono">48</span>
+        <span class="stat-label">Learning Modules</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-num mono">94%</span>
+        <span class="stat-label">Completion Rate</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Course Roadmap -->
+  <div class="roadmap-section">
+    <h2 class="section-label">YOUR LEARNING PATH</h2>
+    <div class="roadmap">
+      <div class="roadmap-node active">
+        <div class="node-icon">🛡️</div>
+        <div class="node-label">Beginner</div>
+        <div class="node-desc">Foundations & Basics</div>
+      </div>
+      <div class="roadmap-connector">
+        <div class="connector-line"></div>
+        <div class="connector-arrow">▶</div>
+      </div>
+      <div class="roadmap-node">
+        <div class="node-icon">🔐</div>
+        <div class="node-label">Intermediate</div>
+        <div class="node-desc">Networks & Encryption</div>
+      </div>
+      <div class="roadmap-connector">
+        <div class="connector-line"></div>
+        <div class="connector-arrow">▶</div>
+      </div>
+      <div class="roadmap-node">
+        <div class="node-icon">⚡</div>
+        <div class="node-label">Advanced</div>
+        <div class="node-desc">Ethical Hacking & OWASP</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Featured Module Preview Cards -->
+  <div class="featured-section">
+    <h2 class="section-label">FEATURED MODULES</h2>
+    <div class="featured-grid">
+      <div class="featured-card">
+        <div class="card-tag beginner">BEGINNER</div>
+        <h3>CIA Triad Fundamentals</h3>
+        <p>Understand the core pillars: Confidentiality, Integrity, and Availability.</p>
+        <div class="card-meta"><span class="mono">~45 min</span><span>4.9 ⭐</span></div>
+      </div>
+      <div class="featured-card">
+        <div class="card-tag intermediate">INTERMEDIATE</div>
+        <h3>Encryption Deep Dive</h3>
+        <p>Symmetric vs asymmetric encryption, TLS/SSL, and key management basics.</p>
+        <div class="card-meta"><span class="mono">~90 min</span><span>4.8 ⭐</span></div>
+      </div>
+      <div class="featured-card">
+        <div class="card-tag advanced">ADVANCED</div>
+        <h3>OWASP Top 10 Walkthrough</h3>
+        <p>Interactive exploration of the most critical web application security risks.</p>
+        <div class="card-meta"><span class="mono">~120 min</span><span>5.0 ⭐</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cybersecurity News Section -->
+  <div class="news-section">
+    <h2 class="section-label">CYBER THREAT INTEL — LATEST TRENDS</h2>
+    <div class="news-ticker-wrap">
+      <div class="news-ticker" id="newsTicker">
+        <div class="news-item">
+          <span class="news-tag">ALERT</span>
+          <span>Ransomware attacks on universities increased 400% in 2024 — learn to protect your institution.</span>
+        </div>
+        <div class="news-item">
+          <span class="news-tag">TREND</span>
+          <span>AI-powered phishing now accounts for 68% of credential theft incidents worldwide.</span>
+        </div>
+        <div class="news-item">
+          <span class="news-tag">UPDATE</span>
+          <span>NIST Cybersecurity Framework 2.0 released — new governance and supply chain guidance added.</span>
+        </div>
+        <div class="news-item">
+          <span class="news-tag">CAREER</span>
+          <span>Cybersecurity job market shows 3.5M unfilled positions globally — major opportunity for students.</span>
+        </div>
+      </div>
+    </div>
+    <div class="news-cards">
+      <div class="news-card">
+        <div class="news-card-header">
+          <span class="news-date mono">FEB 2025</span>
+          <span class="severity high">HIGH SEVERITY</span>
+        </div>
+        <h4>Zero-Day Vulnerabilities Surge</h4>
+        <p>Security researchers discovered record numbers of zero-day exploits targeting enterprise software. Patch management becomes critical.</p>
+      </div>
+      <div class="news-card">
+        <div class="news-card-header">
+          <span class="news-date mono">JAN 2025</span>
+          <span class="severity medium">MEDIUM</span>
+        </div>
+        <h4>Social Engineering via Deepfakes</h4>
+        <p>Attackers now use AI-generated voice and video to impersonate executives in business email compromise attacks.</p>
+      </div>
+      <div class="news-card">
+        <div class="news-card-header">
+          <span class="news-date mono">DEC 2024</span>
+          <span class="severity low">ADVISORY</span>
+        </div>
+        <h4>Post-Quantum Cryptography Timeline</h4>
+        <p>NIST finalizes first post-quantum cryptographic standards, urging organizations to begin migration planning now.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     SECTION 2: STRUCTURED LEARNING MODULES
+============================================ -->
+<section id="modules" class="modules-section">
+  <div class="section-header">
+    <span class="section-overline mono">// STRUCTURED CURRICULUM</span>
+    <h2>Learning <span class="accent">Modules</span></h2>
+    <p>Three progressive levels designed to take you from zero to cybersecurity professional.</p>
+  </div>
+
+  <!-- BEGINNER -->
+  <div class="level-block">
+    <div class="level-header beginner-header">
+      <div class="level-badge">
+        <span>🛡️</span>
+        <div>
+          <div class="level-title">Beginner Level</div>
+          <div class="level-subtitle mono">Foundation & Core Concepts</div>
+        </div>
+      </div>
+      <div class="level-progress-mini">
+        <span class="mono">4 Modules</span>
+      </div>
+    </div>
+    <div class="modules-grid">
+      <div class="module-card" data-level="beginner">
+        <div class="module-num mono">01</div>
+        <div class="module-icon">🌐</div>
+        <h3>Introduction to Cybersecurity</h3>
+        <p>Core concepts, history of cyber attacks, why security matters in a connected world.</p>
+        <div class="module-footer">
+          <span class="tag-pill beginner">Beginner</span>
+          <span class="mono text-dim">45 min</span>
+        </div>
+      </div>
+      <div class="module-card" data-level="beginner">
+        <div class="module-num mono">02</div>
+        <div class="module-icon">🔺</div>
+        <h3>The CIA Triad</h3>
+        <p>Confidentiality, Integrity, Availability — the three pillars every security professional lives by.</p>
+        <div class="module-footer">
+          <span class="tag-pill beginner">Beginner</span>
+          <span class="mono text-dim">30 min</span>
+        </div>
+      </div>
+      <div class="module-card" data-level="beginner">
+        <div class="module-num mono">03</div>
+        <div class="module-icon">⚠️</div>
+        <h3>Types of Cyber Threats</h3>
+        <p>Malware, phishing, DDoS, man-in-the-middle attacks, and more — recognize and understand each.</p>
+        <div class="module-footer">
+          <span class="tag-pill beginner">Beginner</span>
+          <span class="mono text-dim">60 min</span>
+        </div>
+      </div>
+      <div class="module-card" data-level="beginner">
+        <div class="module-num mono">04</div>
+        <div class="module-icon">🔑</div>
+        <h3>Password Security Basics</h3>
+        <p>Strong passwords, MFA, password managers, and why "password123" can cost millions.</p>
+        <div class="module-footer">
+          <span class="tag-pill beginner">Beginner</span>
+          <span class="mono text-dim">40 min</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTERMEDIATE -->
+  <div class="level-block">
+    <div class="level-header intermediate-header">
+      <div class="level-badge">
+        <span>🔐</span>
+        <div>
+          <div class="level-title">Intermediate Level</div>
+          <div class="level-subtitle mono">Networks & Security Systems</div>
+        </div>
+      </div>
+      <div class="level-progress-mini">
+        <span class="mono">4 Modules</span>
+      </div>
+    </div>
+    <div class="modules-grid">
+      <div class="module-card" data-level="intermediate">
+        <div class="module-num mono">05</div>
+        <div class="module-icon">🌍</div>
+        <h3>Network Security Basics</h3>
+        <p>Firewalls, VPNs, IDS/IPS, network topology, and how attackers exploit network weaknesses.</p>
+        <div class="module-footer">
+          <span class="tag-pill intermediate">Intermediate</span>
+          <span class="mono text-dim">75 min</span>
+        </div>
+      </div>
+      <div class="module-card" data-level="intermediate">
+        <div class="module-num mono">06</div>
+        <div class="module-icon">🔒</div>
+        <h3>Encryption Concepts</h3>
+        <p>Symmetric & asymmetric encryption, hashing, PKI, TLS/SSL certificates explained clearly.</p>
+        <div class="module-footer">
+          <span class="tag-pill intermediate">Intermediate</span>
+          <span class="mono text-dim">90 min</span>
+        </div>
+      </div>
+      <div class="module-card" data-level="intermediate">
+        <div class="module-num mono">07</div>
+        <div class="module-icon">🎭</div>
+        <h3>Social Engineering Awareness</h3>
+        <p>Phishing, pretexting, baiting, vishing — how humans are the weakest link in security.</p>
+        <div class="module-footer">
+          <span class="tag-pill intermediate">Intermediate</span>
+          <span class="mono text-dim">55 min</span>
+        </div>
+      </div>
+      <div class="module-card" data-level="intermediate">
+        <div class="module-num mono">08</div>
+        <div class="module-icon">🦠</div>
+        <h3>Malware Types</h3>
+        <p>Viruses, worms, trojans, spyware, ransomware — how each works and how to defend against them.</p>
+        <div class="module-footer">
+          <span class="tag-pill intermediate">Intermediate</span>
+          <span class="mono text-dim">65 min</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADVANCED -->
+  <div class="level-block">
+    <div class="level-header advanced-header">
+      <div class="level-badge">
+        <span>⚡</span>
+        <div>
+          <div class="level-title">Advanced Level</div>
+          <div class="level-subtitle mono">Ethical Hacking & Governance</div>
+        </div>
+      </div>
+      <div class="level-progress-mini">
+        <span class="mono">4 Modules</span>
+      </div>
+    </div>
+    <div class="modules-grid">
+      <div class="module-card" data-level="advanced">
+        <div class="module-num mono">09</div>
+        <div class="module-icon">🥷</div>
+        <h3>Ethical Hacking Concepts</h3>
+        <p>Penetration testing methodology, reconnaissance, footprinting — think like an attacker to defend better.</p>
+        <div class="module-footer">
+          <span class="tag-pill advanced">Advanced</span>
+          <span class="mono text-dim">120 min</span>
+        </div>
+      </div>
+      <div class="module-card" data-level="advanced">
+        <div class="module-num mono">10</div>
+        <div class="module-icon">🕸️</div>
+        <h3>Web Vulnerabilities (OWASP Top 10)</h3>
+        <p>Injection, broken auth, XSS, IDOR, security misconfigurations — theory and mitigation strategies.</p>
+        <div class="module-footer">
+          <span class="tag-pill advanced">Advanced</span>
+          <span class="mono text-dim">110 min</span>
+        </div>
+      </div>
+      <div class="module-card" data-level="advanced">
+        <div class="module-num mono">11</div>
+        <div class="module-icon">🏛️</div>
+        <h3>Digital Privacy & Governance</h3>
+        <p>GDPR, data sovereignty, privacy by design, legal frameworks, and compliance requirements.</p>
+        <div class="module-footer">
+          <span class="tag-pill advanced">Advanced</span>
+          <span class="mono text-dim">80 min</span>
+        </div>
+      </div>
+      <div class="module-card" data-level="advanced">
+        <div class="module-num mono">12</div>
+        <div class="module-icon">🚨</div>
+        <h3>Incident Response Basics</h3>
+        <p>NIST IR lifecycle — Prepare, Detect, Contain, Eradicate, Recover. Build your playbook.</p>
+        <div class="module-footer">
+          <span class="tag-pill advanced">Advanced</span>
+          <span class="mono text-dim">95 min</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     SECTION 3: INTERACTIVE ACTIVITIES
+============================================ -->
+<section id="activities" class="activities-section">
+  <div class="section-header">
+    <span class="section-overline mono">// INTERACTIVE LEARNING</span>
+    <h2>Learn by <span class="accent">Doing</span></h2>
+    <p>Hands-on simulations and exercises that reinforce theory with practice.</p>
+  </div>
+
+  <!-- ACTIVITY 1: Quiz -->
+  <div class="activity-block">
+    <div class="activity-label mono">[ ACTIVITY 01 — KNOWLEDGE CHECK ]</div>
+    <h3 class="activity-title">Cybersecurity Quiz</h3>
+    <div class="quiz-container" id="quizContainer">
+      <div class="quiz-progress-bar">
+        <div class="quiz-progress-fill" id="quizProgressFill" style="width: 0%"></div>
+      </div>
+      <div class="quiz-meta mono">
+        <span>Question <span id="qCurrent">1</span> of <span id="qTotal">5</span></span>
+        <span>Score: <span id="quizScore">0</span> pts</span>
+      </div>
+      <div id="quizQuestion" class="quiz-question">
+        What does "CIA" stand for in cybersecurity?
+      </div>
+      <div id="quizOptions" class="quiz-options">
+        <button class="quiz-opt" onclick="answerQuiz(this, false)">Central Intelligence Agency</button>
+        <button class="quiz-opt" onclick="answerQuiz(this, true)">Confidentiality, Integrity, Availability</button>
+        <button class="quiz-opt" onclick="answerQuiz(this, false)">Cyber Intrusion Alert</button>
+        <button class="quiz-opt" onclick="answerQuiz(this, false)">Configuration, Isolation, Access</button>
+      </div>
+      <div id="quizFeedback" class="quiz-feedback hidden"></div>
+      <button id="quizNext" class="btn-primary hidden" onclick="nextQuestion()">Next Question →</button>
+    </div>
+  </div>
+
+  <!-- ACTIVITY 2: Phishing Identification -->
+  <div class="activity-block">
+    <div class="activity-label mono">[ ACTIVITY 02 — THREAT IDENTIFICATION ]</div>
+    <h3 class="activity-title">Spot the Phishing Email</h3>
+    <div class="phishing-container">
+      <div class="email-card" id="emailCard">
+        <div class="email-header-bar">
+          <div class="email-field"><span class="email-label">FROM:</span><span class="email-val" id="emailFrom">security-alerts@paypa1.support.ru</span></div>
+          <div class="email-field"><span class="email-label">TO:</span><span class="email-val">you@university.edu</span></div>
+          <div class="email-field"><span class="email-label">SUBJECT:</span><span class="email-val" id="emailSubject">URGENT: Your account has been suspended!</span></div>
+        </div>
+        <div class="email-body" id="emailBody">
+          <p>Dear Valued Customer,</p>
+          <p>We have detected <strong>suspicious activity</strong> on your account. Your account has been <span style="color:#f87171">temporarily suspended</span> for your safety.</p>
+          <p>You must <strong>verify your identity immediately</strong> or your account will be permanently deleted within <strong>24 HOURS</strong>.</p>
+          <p><a href="#" onclick="return false;" style="color:#60a5fa">Click here to verify → http://paypa1-secure-verify.xyz/login</a></p>
+          <p>Thank you for your cooperation,<br/>PayPal Security Team</p>
+        </div>
+      </div>
+      <div class="phishing-actions">
+        <button class="phish-btn safe-btn" onclick="judgeEmail('safe')">✅ Looks Safe</button>
+        <button class="phish-btn phish-detect-btn" onclick="judgeEmail('phishing')">🚨 This is Phishing!</button>
+      </div>
+      <div id="phishingFeedback" class="quiz-feedback hidden"></div>
+      <button class="btn-ghost" id="nextEmailBtn" onclick="nextEmail()" style="margin-top:1rem;display:none;">Try Another Email →</button>
+    </div>
+  </div>
+
+  <!-- ACTIVITY 3: Case Study Cards -->
+  <div class="activity-block">
+    <div class="activity-label mono">[ ACTIVITY 03 — CASE STUDIES ]</div>
+    <h3 class="activity-title">Real-World Breach Analysis</h3>
+    <div class="case-studies-grid">
+      <div class="case-card" onclick="expandCase(this)">
+        <div class="case-year mono">2017</div>
+        <h4>WannaCry Ransomware</h4>
+        <p>Affected 200,000+ computers across 150 countries. Learn how a single unpatched vulnerability led to billions in damage.</p>
+        <div class="case-tags">
+          <span>Ransomware</span><span>Patch Management</span><span>NHS Impact</span>
+        </div>
+        <div class="case-expand hidden">
+          <hr style="border-color:#1e3a5f;margin:1rem 0"/>
+          <p><strong>Attack Vector:</strong> EternalBlue SMB exploit (leaked NSA tool) targeting unpatched Windows XP systems.</p>
+          <p><strong>Lesson:</strong> Always apply security patches. Legacy system management is a critical security concern.</p>
+          <p><strong>Mitigation:</strong> Segment networks, maintain offline backups, enforce patch policies.</p>
+        </div>
+      </div>
+      <div class="case-card" onclick="expandCase(this)">
+        <div class="case-year mono">2020</div>
+        <h4>SolarWinds Supply Chain</h4>
+        <p>Nation-state attack compromised software build pipeline, affecting 18,000 organizations including US government agencies.</p>
+        <div class="case-tags">
+          <span>Supply Chain</span><span>Nation-State</span><span>APT</span>
+        </div>
+        <div class="case-expand hidden">
+          <hr style="border-color:#1e3a5f;margin:1rem 0"/>
+          <p><strong>Attack Vector:</strong> Malicious code injected into SolarWinds Orion software updates, distributed to customers.</p>
+          <p><strong>Lesson:</strong> Third-party software risk is real. Zero-trust architecture and software bill of materials (SBOM) are critical.</p>
+          <p><strong>Mitigation:</strong> Vendor security assessments, code signing, behavioral monitoring.</p>
+        </div>
+      </div>
+      <div class="case-card" onclick="expandCase(this)">
+        <div class="case-year mono">2021</div>
+        <h4>Colonial Pipeline Attack</h4>
+        <p>Ransomware on OT systems caused fuel shortages across US East Coast. A single compromised VPN credential caused national impact.</p>
+        <div class="case-tags">
+          <span>Critical Infrastructure</span><span>OT Security</span><span>Credential Theft</span>
+        </div>
+        <div class="case-expand hidden">
+          <hr style="border-color:#1e3a5f;margin:1rem 0"/>
+          <p><strong>Attack Vector:</strong> Compromised VPN credentials (no MFA). DarkSide ransomware deployed on corporate IT network.</p>
+          <p><strong>Lesson:</strong> MFA is non-negotiable. IT/OT network segmentation is critical for critical infrastructure.</p>
+          <p><strong>Mitigation:</strong> Enforce MFA on all remote access, segment operational technology networks.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACTIVITY 4: Threat Scenario Decision Making -->
+  <div class="activity-block">
+    <div class="activity-label mono">[ ACTIVITY 04 — DECISION MAKING ]</div>
+    <h3 class="activity-title">Threat Response Scenario</h3>
+    <div class="scenario-container" id="scenarioContainer">
+      <div class="scenario-situation">
+        <div class="scenario-icon">🚨</div>
+        <div>
+          <h4 id="scenarioTitle">Suspicious Login Detected</h4>
+          <p id="scenarioDesc">You're a junior security analyst. The SIEM shows a login to the CEO's account from an IP in Eastern Europe at 3AM local time. The CEO is known to travel internationally. What do you do?</p>
+        </div>
+      </div>
+      <div class="scenario-options" id="scenarioOptions">
+        <button class="scenario-btn" onclick="chooseScenario(this, 'wrong', 'Ignoring alerts is dangerous. Even if it\'s a false positive, unacknowledged alerts can lead to missed breaches. Always investigate.')">Do nothing, probably just the CEO traveling</button>
+        <button class="scenario-btn" onclick="chooseScenario(this, 'partial', 'Good instinct, but calling the CEO directly might alert an attacker if the CEO\'s phone is also compromised. Use out-of-band verification.')">Call the CEO to verify</button>
+        <button class="scenario-btn" onclick="chooseScenario(this, 'best', 'Excellent! Temporarily suspending access while escalating protects the CEO\'s account while the SOC investigates. Follow IR procedures.')">Suspend the session, escalate to SOC lead, initiate IR procedures</button>
+        <button class="scenario-btn" onclick="chooseScenario(this, 'wrong', 'Deleting the account would lock out the CEO and doesn\'t follow proper incident response procedures. Preserve evidence.')">Delete the account and force password reset</button>
+      </div>
+      <div id="scenarioFeedback" class="quiz-feedback hidden"></div>
+      <button id="nextScenarioBtn" class="btn-primary hidden" onclick="nextScenario()">Next Scenario →</button>
+    </div>
+  </div>
+
+  <!-- ACTIVITY 5: Risk Assessment Checklist -->
+  <div class="activity-block">
+    <div class="activity-label mono">[ ACTIVITY 05 — RISK ASSESSMENT ]</div>
+    <h3 class="activity-title">Security Readiness Checklist</h3>
+    <p style="color: var(--text-dim); margin-bottom: 1.5rem;">Assess your organization's security posture. Check all that apply:</p>
+    <div class="checklist-container">
+      <div class="checklist-category">
+        <div class="checklist-cat-title">🔑 Access Control</div>
+        <label class="check-item"><input type="checkbox" onchange="updateChecklist()" /><span>Multi-factor authentication enabled on all accounts</span></label>
+        <label class="check-item"><input type="checkbox" onchange="updateChecklist()" /><span>Principle of least privilege enforced</span></label>
+        <label class="check-item"><input type="checkbox" onchange="updateChecklist()" /><span>Regular access reviews conducted quarterly</span></label>
+      </div>
+      <div class="checklist-category">
+        <div class="checklist-cat-title">🌐 Network Security</div>
+        <label class="check-item"><input type="checkbox" onchange="updateChecklist()" /><span>Network segmentation implemented</span></label>
+        <label class="check-item"><input type="checkbox" onchange="updateChecklist()" /><span>Firewall rules reviewed and documented</span></label>
+        <label class="check-item"><input type="checkbox" onchange="updateChecklist()" /><span>VPN required for remote access</span></label>
+      </div>
+      <div class="checklist-category">
+        <div class="checklist-cat-title">📋 Policies & Procedures</div>
+        <label class="check-item"><input type="checkbox" onchange="updateChecklist()" /><span>Incident response plan documented and tested</span></label>
+        <label class="check-item"><input type="checkbox" onchange="updateChecklist()" /><span>Employee security awareness training completed</span></label>
+        <label class="check-item"><input type="checkbox" onchange="updateChecklist()" /><span>Data backup and recovery procedures tested</span></label>
+      </div>
+    </div>
+    <div class="checklist-score-display">
+      <div class="checklist-score-bar">
+        <div class="checklist-score-fill" id="checklistFill" style="width: 0%"></div>
+      </div>
+      <div class="checklist-score-text mono" id="checklistText">Security Score: 0/9 — Start checking items above!</div>
+    </div>
+  </div>
+
+  <!-- ACTIVITY 6: Secure vs Insecure Toggle -->
+  <div class="activity-block">
+    <div class="activity-label mono">[ ACTIVITY 06 — PRACTICES COMPARISON ]</div>
+    <h3 class="activity-title">Secure vs. Insecure Practices</h3>
+    <div class="toggle-tabs">
+      <button class="toggle-tab active" id="insecureTab" onclick="switchPractice('insecure')">⚠️ Insecure</button>
+      <button class="toggle-tab" id="secureTab" onclick="switchPractice('secure')">✅ Secure</button>
+    </div>
+    <div class="practice-display" id="practiceDisplay">
+      <div class="practice-scenario insecure-panel" id="insecurePanel">
+        <div class="practice-item">
+          <span class="pi-icon">❌</span>
+          <div><strong>Password:</strong> <code>password123</code> — reused across all accounts, never changed.</div>
+        </div>
+        <div class="practice-item">
+          <span class="pi-icon">❌</span>
+          <div><strong>Software:</strong> Running Windows XP with disabled auto-updates to "save bandwidth".</div>
+        </div>
+        <div class="practice-item">
+          <span class="pi-icon">❌</span>
+          <div><strong>Email:</strong> Clicking a link from "Bank0fAmerica.support.ru" without checking the domain.</div>
+        </div>
+        <div class="practice-item">
+          <span class="pi-icon">❌</span>
+          <div><strong>WiFi:</strong> Sending banking credentials over public café WiFi without VPN.</div>
+        </div>
+        <div class="practice-item">
+          <span class="pi-icon">❌</span>
+          <div><strong>Backups:</strong> No backup strategy — "It's all on the cloud, right?"</div>
+        </div>
+      </div>
+      <div class="practice-scenario secure-panel hidden" id="securePanel">
+        <div class="practice-item">
+          <span class="pi-icon">✅</span>
+          <div><strong>Password:</strong> <code>T#r4!sK9$mQx</code> — unique 14-char password + MFA enabled, stored in password manager.</div>
+        </div>
+        <div class="practice-item">
+          <span class="pi-icon">✅</span>
+          <div><strong>Software:</strong> Auto-updates enabled. Vulnerability scanning runs weekly. EOL software decommissioned.</div>
+        </div>
+        <div class="practice-item">
+          <span class="pi-icon">✅</span>
+          <div><strong>Email:</strong> Hovering links before clicking. Verifying sender domain. Reporting suspicious emails to IT.</div>
+        </div>
+        <div class="practice-item">
+          <span class="pi-icon">✅</span>
+          <div><strong>WiFi:</strong> Always using VPN on public networks. Verifying HTTPS on all sensitive sites.</div>
+        </div>
+        <div class="practice-item">
+          <span class="pi-icon">✅</span>
+          <div><strong>Backups:</strong> 3-2-1 backup rule: 3 copies, 2 different media, 1 offsite. Tested monthly.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     SECTION 4: STUDENT DASHBOARD
+============================================ -->
+<section id="dashboard" class="dashboard-section">
+  <div class="section-header">
+    <span class="section-overline mono">// STUDENT DASHBOARD</span>
+    <h2>Your <span class="accent">Progress</span></h2>
+    <p>Track your learning journey and earn badges as you advance.</p>
+  </div>
+
+  <div class="dashboard-grid">
+    <!-- Profile Card -->
+    <div class="dash-card profile-card">
+      <div class="profile-avatar">
+        <div class="avatar-ring"></div>
+        <div class="avatar-inner">AJ</div>
+      </div>
+      <div class="profile-info">
+        <h3>Alex Johnson</h3>
+        <div class="mono text-dim" style="font-size:0.85rem">Student ID: CS-2025-4871</div>
+        <div class="profile-rank">
+          <span class="rank-badge">🔐 Intermediate Learner</span>
+        </div>
+      </div>
+      <div class="profile-stats">
+        <div class="p-stat"><span class="mono accent">847</span><span>Total Points</span></div>
+        <div class="p-stat"><span class="mono accent">12</span><span>Streak Days</span></div>
+        <div class="p-stat"><span class="mono accent">#94</span><span>Leaderboard</span></div>
+      </div>
+    </div>
+
+    <!-- Overall Progress -->
+    <div class="dash-card progress-card">
+      <h3>Overall Progress</h3>
+      <div class="overall-progress">
+        <div class="progress-ring-container">
+          <svg viewBox="0 0 120 120" class="progress-ring-svg">
+            <circle cx="60" cy="60" r="50" class="ring-bg"/>
+            <circle cx="60" cy="60" r="50" class="ring-fill" id="progressRing" stroke-dasharray="0 314"/>
+          </svg>
+          <div class="progress-ring-text">
+            <span class="ring-percent" id="ringPercent">0%</span>
+            <span class="ring-label">Complete</span>
+          </div>
+        </div>
+        <div class="progress-details">
+          <div class="prog-detail">
+            <span>Beginner Modules</span>
+            <div class="mini-bar"><div class="mini-fill" style="width:100%;background:var(--green-accent)"></div></div>
+            <span class="mono" style="font-size:0.8rem">4/4 ✅</span>
+          </div>
+          <div class="prog-detail">
+            <span>Intermediate Modules</span>
+            <div class="mini-bar"><div class="mini-fill" style="width:50%;background:var(--blue-accent)"></div></div>
+            <span class="mono" style="font-size:0.8rem">2/4 🔄</span>
+          </div>
+          <div class="prog-detail">
+            <span>Advanced Modules</span>
+            <div class="mini-bar"><div class="mini-fill" style="width:0%;background:var(--orange-accent)"></div></div>
+            <span class="mono" style="font-size:0.8rem">0/4 🔒</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skill Badges -->
+    <div class="dash-card badges-card">
+      <h3>Earned Badges</h3>
+      <div class="badges-grid">
+        <div class="badge earned" title="Completed all beginner modules">
+          <div class="badge-icon">🛡️</div>
+          <div class="badge-name">Foundation</div>
+        </div>
+        <div class="badge earned" title="Passed CIA Triad quiz with 100%">
+          <div class="badge-icon">🔺</div>
+          <div class="badge-name">CIA Expert</div>
+        </div>
+        <div class="badge earned" title="Identified 5 phishing emails">
+          <div class="badge-icon">🎣</div>
+          <div class="badge-name">Phish Detector</div>
+        </div>
+        <div class="badge earned" title="7 day learning streak">
+          <div class="badge-icon">🔥</div>
+          <div class="badge-name">7-Day Streak</div>
+        </div>
+        <div class="badge locked" title="Complete network security module">
+          <div class="badge-icon">🌐</div>
+          <div class="badge-name">Net Guardian</div>
+        </div>
+        <div class="badge locked" title="Pass encryption quiz">
+          <div class="badge-icon">🔒</div>
+          <div class="badge-name">Crypto Master</div>
+        </div>
+        <div class="badge locked" title="Complete all intermediate modules">
+          <div class="badge-icon">⚔️</div>
+          <div class="badge-name">Defender</div>
+        </div>
+        <div class="badge locked" title="Reach advanced level">
+          <div class="badge-icon">⚡</div>
+          <div class="badge-name">Elite Hacker</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Points & Leaderboard -->
+    <div class="dash-card points-card">
+      <h3>Points Breakdown</h3>
+      <div class="points-list">
+        <div class="point-row">
+          <span>Module Completions</span>
+          <span class="mono accent">+400 pts</span>
+        </div>
+        <div class="point-row">
+          <span>Quiz Performance</span>
+          <span class="mono accent">+250 pts</span>
+        </div>
+        <div class="point-row">
+          <span>Daily Streak Bonus</span>
+          <span class="mono accent">+120 pts</span>
+        </div>
+        <div class="point-row">
+          <span>Activity Challenges</span>
+          <span class="mono accent">+77 pts</span>
+        </div>
+        <div class="point-row total-row">
+          <span>Total Score</span>
+          <span class="mono" style="color:var(--green-accent);font-size:1.2rem">847 pts</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recommended Next Lesson -->
+    <div class="dash-card next-lesson-card">
+      <div class="next-lesson-header">
+        <span class="section-overline mono" style="font-size:0.7rem">RECOMMENDED NEXT</span>
+        <span class="tag-pill intermediate" style="font-size:0.7rem">Intermediate</span>
+      </div>
+      <h3>Encryption Concepts</h3>
+      <p>Continue your journey into cryptography. Learn symmetric vs asymmetric encryption, and how TLS protects your data online.</p>
+      <div class="next-lesson-meta">
+        <span class="mono text-dim">Module 06 • 90 min</span>
+        <div class="mini-bar" style="margin:0.5rem 0"><div class="mini-fill" style="width:0%"></div></div>
+        <span class="mono text-dim" style="font-size:0.8rem">Not started</span>
+      </div>
+      <a href="#modules" class="btn-primary" style="width:100%;text-align:center;margin-top:1rem;display:block">
+        Start Module →
+      </a>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="dash-card activity-card">
+      <h3>Recent Activity</h3>
+      <div class="activity-feed">
+        <div class="feed-item">
+          <div class="feed-dot green"></div>
+          <div>
+            <div>Completed <strong>Password Security Basics</strong></div>
+            <div class="mono text-dim" style="font-size:0.75rem">2 hours ago • +50 pts</div>
+          </div>
+        </div>
+        <div class="feed-item">
+          <div class="feed-dot blue"></div>
+          <div>
+            <div>Scored 5/5 on <strong>CIA Triad Quiz</strong></div>
+            <div class="mono text-dim" style="font-size:0.75rem">Yesterday • +75 pts</div>
+          </div>
+        </div>
+        <div class="feed-item">
+          <div class="feed-dot green"></div>
+          <div>
+            <div>Completed <strong>Types of Cyber Threats</strong></div>
+            <div class="mono text-dim" style="font-size:0.75rem">2 days ago • +50 pts</div>
+          </div>
+        </div>
+        <div class="feed-item">
+          <div class="feed-dot yellow"></div>
+          <div>
+            <div>Earned badge: <strong>🔥 7-Day Streak</strong></div>
+            <div class="mono text-dim" style="font-size:0.75rem">3 days ago • +100 pts</div>
+          </div>
+        </div>
+        <div class="feed-item">
+          <div class="feed-dot blue"></div>
+          <div>
+            <div>Completed <strong>Introduction to Cybersecurity</strong></div>
+            <div class="mono text-dim" style="font-size:0.75rem">1 week ago • +50 pts</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     FOOTER
+============================================ -->
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-brand">
+      <div class="nav-logo">
+        <span class="logo-bracket">[</span>CyberAcademy<span class="logo-bracket">]</span>
+      </div>
+      <p class="mono text-dim" style="font-size:0.8rem;margin-top:0.5rem">Empowering the next generation of cybersecurity professionals.</p>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <div class="footer-col-title">Platform</div>
+        <a href="#home">Home</a>
+        <a href="#modules">Modules</a>
+        <a href="#activities">Activities</a>
+        <a href="#dashboard">Dashboard</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Resources</div>
+        <a href="#">CTF Challenges</a>
+        <a href="#">Study Guides</a>
+        <a href="#">Community Forum</a>
+        <a href="#">Blog</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom mono">
+    <span>© 2025 CyberAcademy — Educational Platform</span>
+    <span>Built for college students | Frontend Demo</span>
+  </div>
+</footer>
+
+<!-- LOGIN/SIGNUP MODAL -->
+<div class="modal-overlay hidden" id="modalOverlay" onclick="closeModal()">
+  <div class="modal" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-tabs">
+      <button class="modal-tab active" id="loginTabBtn" onclick="switchModal('login')">Login</button>
+      <button class="modal-tab" id="signupTabBtn" onclick="switchModal('signup')">Sign Up</button>
+    </div>
+    <div id="loginForm">
+      <h3 style="margin-bottom:1.5rem">Welcome Back</h3>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" class="form-input" placeholder="you@university.edu" />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" class="form-input" placeholder="••••••••" />
+      </div>
+      <button class="btn-primary" style="width:100%">Login to CyberAcademy</button>
+    </div>
+    <div id="signupForm" class="hidden">
+      <h3 style="margin-bottom:1.5rem">Create Account</h3>
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" class="form-input" placeholder="Alex Johnson" />
+      </div>
+      <div class="form-group">
+        <label>University Email</label>
+        <input type="email" class="form-input" placeholder="you@university.edu" />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" class="form-input" placeholder="Min. 12 characters" />
+      </div>
+      <button class="btn-primary" style="width:100%">Create Account</button>
+    </div>
+  </div>
+</div>
+
+<script src="api.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
