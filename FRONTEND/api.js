@@ -42,7 +42,7 @@ const API_BASE_URL = (() => {
   if (hostname === 'localhost' || hostname === '127.0.0.1') {
     return 'http://localhost:5000';
   }
-  return 'https://cyber-academy-3d23.onrender.com'; // ← your Render URL
+  return 'https://cyber-academy-1-ocdk.onrender.com'; // ← your Render URL
 })();
 
 // ── User Cache Helpers ────────────────────────────────────────
