@@ -1869,7 +1869,23 @@ section { position: relative; }
 @media (max-width: 768px) {
   :root { --nav-height: 60px; }
 
-  .nav-links, .nav-auth { display: none; }
+  /* Hide nav links on mobile — shown via hamburger */
+  .nav-links { display: none; }
+
+  /* Show Login/Sign Up buttons in navbar on mobile — smaller size */
+  .nav-auth {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 0.5rem;
+  }
+
+  .nav-auth .btn-ghost,
+  .nav-auth .btn-primary {
+    font-size: 0.72rem;
+    padding: 0.4rem 0.75rem;
+  }
   
   .nav-links.open {
     display: flex;
@@ -1890,6 +1906,13 @@ section { position: relative; }
   }
 
   .hamburger { display: flex; }
+
+  /* Make modal scrollable so submit button is always reachable */
+  .modal {
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 1.5rem;
+  }
 
   .hero-title { font-size: clamp(2rem, 8vw, 3.5rem); }
   
