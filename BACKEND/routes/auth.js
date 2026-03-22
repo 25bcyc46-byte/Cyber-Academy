@@ -1,67 +1,73 @@
-const express = require('express');
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+// ============================================================
+// FILE PATH: routes/auth.js
+// CHANGES:   Firebase Auth handles register/login on the
+//            FRONTEND now. This backend only:
+//              POST /api/auth/register → creates Firestore profile
+//              GET  /api/auth/me       → returns user profile
+//            Removed: bcryptjs, jwt, User mongoose model.
+// ============================================================
+const express  = require('express');
+const { db }   = require('../config/firebase');
+const { protect } = require('../middleware/auth');
 
 const router = express.Router();
 
-const generateToken = (id) =>
-  jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES_IN || '7d',
-  });
-
-// POST /api/auth/register
-router.post('/register', async (req, res, next) => {
+// ── POST /api/auth/register ────────────────────────────────────
+// Called by frontend AFTER Firebase createUserWithEmailAndPassword()
+// succeeds. Creates the user's Firestore profile document.
+router.post('/register', protect, async (req, res, next) => {
   try {
-    const { username, email, password } = req.body;
+    const { username } = req.body;
+    const { uid, email } = req.user;
 
-    if (!username || !email || !password) {
-      return res.status(400).json({ message: 'All fields are required' });
+    if (!username) {
+      return res.status(400).json({ message: 'Username is required' });
     }
 
-    const user = await User.create({ username, email, password });
+    // Enforce unique username
+    const existing = await db.collection('users')
+      .where('username', '==', username)
+      .limit(1)
+      .get();
+
+    if (!existing.empty) {
+      return res.status(400).json({ message: 'Username already taken' });
+    }
+
+    const userDoc = {
+      username,
+      email,
+      role:             'student',
+      points:           0,
+      completedModules: [],
+      badges:           [],
+      createdAt:        new Date().toISOString(),
+    };
+
+    await db.collection('users').doc(uid).set(userDoc);
 
     res.status(201).json({
-      message: 'Account created successfully',
-      token: generateToken(user._id),
-      user: {
-        id: user._id,
-        username: user.username,
-        email: user.email,
-        role: user.role,
-        points: user.points,
-      },
+      message:  'Profile created successfully',
+      username,
+      points:   0,
+      rank:     'Beginner',
     });
   } catch (error) {
     next(error);
   }
 });
 
-// POST /api/auth/login
-router.post('/login', async (req, res, next) => {
+// ── GET /api/auth/me ───────────────────────────────────────────
+// Returns the logged-in user's Firestore profile.
+router.get('/me', protect, async (req, res, next) => {
   try {
-    const { email, password } = req.body;
+    const snap = await db.collection('users').doc(req.user.uid).get();
 
-    if (!email || !password) {
-      return res.status(400).json({ message: 'Email and password are required' });
+    if (!snap.exists) {
+      return res.status(404).json({ message: 'User profile not found' });
     }
 
-    const user = await User.findOne({ email }).select('+password');
-
-    if (!user || !(await user.comparePassword(password))) {
-      return res.status(401).json({ message: 'Invalid email or password' });
-    }
-
-    res.json({
-      message: 'Login successful',
-      token: generateToken(user._id),
-      user: {
-        id: user._id,
-        username: user.username,
-        email: user.email,
-        role: user.role,
-        points: user.points,
-      },
-    });
+    res.json({ uid: req.user.uid, ...snap.data() });
   } catch (error) {
     next(error);
   }

@@ -1,48 +1,60 @@
-const express = require('express');
-const User = require('../models/User');
-const Activity = require('../models/Activity');
-const Module = require('../models/Module');
-const { protect } = require('../middleware/auth');
+// ============================================================
+// FILE PATH: routes/dashboard.js
+// CHANGES:   Replaced all mongoose queries with Firestore.
+//            Removed User, Activity, Module model imports.
+// ============================================================
+const express      = require('express');
+const { db }       = require('../config/firebase');
+const { protect }  = require('../middleware/auth');
 
 const router = express.Router();
 
-// GET /api/dashboard — protected
+// ── GET /api/dashboard ────────────────────────────────────────
 router.get('/', protect, async (req, res, next) => {
   try {
-    const user = await User.findById(req.user._id).populate(
-      'completedModules',
-      'title level pointsReward'
-    );
+    const uid = req.user.uid;
+
+    // Fetch user profile
+    const userSnap = await db.collection('users').doc(uid).get();
+    if (!userSnap.exists) {
+      return res.status(404).json({ message: 'User profile not found' });
+    }
+    const user = userSnap.data();
 
     // Recent activities (last 10)
-    const recentActivities = await Activity.find({ userId: req.user._id })
-      .sort({ submittedAt: -1 })
+    const actSnap = await db.collection('activities')
+      .where('userId', '==', uid)
+      .orderBy('submittedAt', 'desc')
       .limit(10)
-      .populate('moduleId', 'title level');
+      .get();
+    const recentActivities = actSnap.docs.map(d => ({ id: d.id, ...d.data() }));
 
-    // All modules to calculate recommended (not yet completed)
-    const allModules = await Module.find().select('title level description pointsReward order');
-    const completedIds = user.completedModules.map((m) => m._id.toString());
-    const recommended = allModules
-      .filter((m) => !completedIds.includes(m._id.toString()))
-      .slice(0, 3); // top 3 recommended
+    // All modules
+    const modSnap  = await db.collection('modules').orderBy('order').get();
+    const allModules = modSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+    const completedIds = user.completedModules || [];
+    const recommended  = allModules
+      .filter(m => !completedIds.includes(m.id))
+      .slice(0, 3);
+
+    const progress = allModules.length > 0
+      ? Math.round((completedIds.length / allModules.length) * 100)
+      : 0;
 
     res.json({
-      user: {
-        id: user._id,
-        username: user.username,
-        email: user.email,
-        role: user.role,
-        points: user.points,
-        badges: user.badges,
-        completedModules: user.completedModules,
-        memberSince: user.createdAt,
-      },
+      username:          user.username,
+      email:             user.email,
+      role:              user.role,
+      points:            user.points,
+      badges:            user.badges      || [],
+      completedModules:  completedIds,
+      progress,
       stats: {
-        totalCompleted: user.completedModules.length,
-        totalModules: allModules.length,
-        totalPoints: user.points,
-        badgesEarned: user.badges.length,
+        totalCompleted:  completedIds.length,
+        totalModules:    allModules.length,
+        totalPoints:     user.points,
+        badgesEarned:    (user.badges || []).length,
       },
       recentActivities,
       recommendedModules: recommended,

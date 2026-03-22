@@ -1,5 +1,9 @@
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+// ============================================================
+// FILE PATH: middleware/auth.js
+// CHANGES:   Replaced jwt.verify() with Firebase Admin
+//            auth.verifyIdToken(). No more JWT_SECRET needed.
+// ============================================================
+const { auth, db } = require('../config/firebase');
 
 const protect = async (req, res, next) => {
   try {
@@ -9,24 +13,25 @@ const protect = async (req, res, next) => {
       return res.status(401).json({ message: 'Not authorized, no token' });
     }
 
-    const token = authHeader.split(' ')[1];
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const token   = authHeader.split(' ')[1];
+    const decoded = await auth.verifyIdToken(token);  // ← Firebase does the verification
 
-    req.user = await User.findById(decoded.id).select('-password');
-
-    if (!req.user) {
-      return res.status(401).json({ message: 'User not found' });
-    }
-
+    // Attach uid + email for use in routes (replaces req.user._id pattern)
+    req.user = { uid: decoded.uid, email: decoded.email };
     next();
   } catch (error) {
-    return res.status(401).json({ message: 'Not authorized, invalid token' });
+    return res.status(401).json({ message: 'Not authorized, invalid or expired token' });
   }
 };
 
-const adminOnly = (req, res, next) => {
-  if (req.user && req.user.role === 'admin') return next();
-  return res.status(403).json({ message: 'Access denied: Admins only' });
+const adminOnly = async (req, res, next) => {
+  try {
+    const userSnap = await db.collection('users').doc(req.user.uid).get();
+    if (userSnap.exists && userSnap.data().role === 'admin') return next();
+    return res.status(403).json({ message: 'Access denied: Admins only' });
+  } catch {
+    return res.status(403).json({ message: 'Access denied' });
+  }
 };
 
 module.exports = { protect, adminOnly };

@@ -1,18 +1,30 @@
-const express = require('express');
-const Module = require('../models/Module');
-const { protect } = require('../middleware/auth');
+// ============================================================
+// FILE PATH: routes/modules.js
+// CHANGES:   Replaced mongoose Module model with Firestore.
+// ============================================================
+const express      = require('express');
+const { db }       = require('../config/firebase');
+const { protect }  = require('../middleware/auth');
 
 const router = express.Router();
 
-// GET /api/modules — public, supports ?level= filter
+// ── GET /api/modules — public ─────────────────────────────────
 router.get('/', async (req, res, next) => {
   try {
-    const filter = {};
-    if (req.query.level) filter.level = req.query.level;
+    let query = db.collection('modules').orderBy('order');
 
-    const modules = await Module.find(filter)
-      .select('-content') // exclude heavy content from list view
-      .sort({ level: 1, order: 1 });
+    if (req.query.level) {
+      query = db.collection('modules')
+        .where('level', '==', req.query.level)
+        .orderBy('order');
+    }
+
+    const snap    = await query.get();
+    const modules = snap.docs.map(d => {
+      const data = d.data();
+      const { content, ...rest } = data; // exclude heavy content from list view
+      return { id: d.id, ...rest };
+    });
 
     res.json({ count: modules.length, modules });
   } catch (error) {
@@ -20,16 +32,16 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-// GET /api/modules/:id — protected
+// ── GET /api/modules/:id — protected ─────────────────────────
 router.get('/:id', protect, async (req, res, next) => {
   try {
-    const module = await Module.findById(req.params.id);
+    const snap = await db.collection('modules').doc(req.params.id).get();
 
-    if (!module) {
+    if (!snap.exists) {
       return res.status(404).json({ message: 'Module not found' });
     }
 
-    res.json({ module });
+    res.json({ module: { id: snap.id, ...snap.data() } });
   } catch (error) {
     next(error);
   }

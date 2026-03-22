@@ -1,0 +1,29 @@
+# ============================================================
+# .env  —  CyberAcademy Backend (Firebase)
+# ============================================================
+# Get all FIREBASE_ values from:
+#   Firebase Console → Project Settings → Service Accounts
+#   → Generate new private key → download JSON
+#   Then copy each field from the JSON into the vars below.
+# ============================================================
+
+PORT=5000
+
+# ── Firebase Admin SDK ────────────────────────────────────────
+FIREBASE_PROJECT_ID=cyber-academy-dbd0f
+FIREBASE_PRIVATE_KEY_ID=b7b9f4ec2c4650664221bb48b7fedfb5d582d474
+
+# Paste the full private key INCLUDING the header/footer lines.
+# On Render: add as-is. Locally: wrap in double quotes.
+FIREBASE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCxlOQPQ1RqDThI\ngjSMU2Uh3E9YQerXb+4hZltA+Y4/U2RTjcfBm+mQhmfrZaE6WDTBFp9YrgEKBPga\n1LlQOmEA5iClP0AOvwohp7OR7JPXEj4yJD6S09S4tddCqezKxkswxHzz3CPiTl3l\nWTkLC6Yt4Mqrzwymg59LXWPKvub3GJA6YPQkCeb4iVec++Zdw1IVhpdC6GHA5dOy\nrsPlp7NXfH81/PBN7zkNwE6kiFC/D73PeQlK1091XzEHw6PSNBCF9bTSVWZ38NEI\nc1aaqjyuBwsFTix9qaYGWX1Vlb7ctgP0CarHVHTU2jsH0eYfc1z6fmj7V5Q5wCXr\nEjDci/TlAgMBAAECggEAOj67JLRxQg2O+d1XDfWmdJo1nh2UwM/SG7teT+vqd6PL\nAsq8i6ivTXuAJ0ngvWnD99cLMcN0zMv/cpF2LLXRLkHM0FZ0FMIdORevwruFbCPs\nKXcQ3QjEu0bNUWy5oXKzo822rCd2z5njmz+OAazy9xZFc1/IZu9B9q6tdgjyaXXl\nPEKp0HhdoOlGEuHQYVIO4sAqUqi2FUEPELr+CC0dxqmUon37DDUZ/T1u4baMp8bb\ns2vBV+8adEJXcXqp1VpaDHalFSwYT4pTuVZXdDOY9S1QZb/8Y7qM1qrbmmjIIE4R\nVIC2s0H7esnanzrFgH3zUDxASdUQR4ajNsTi/vAc+wKBgQDm7yEiCRkM8/Idgmuz\ntiO3ECfzzo38yaQa6dyYV1b9Z5cZB7qvv8bZoZFztOOrIm6D76L1xp0lz8Y9fSx0\n8tjmi3JeWHAD9XD8K4o1KcSqnRG87xi+MTNjURDi1OdoX32i3mjouDQvE7H9riOz\nmQwwIF1T7tD2B8LjadM3jqwr3wKBgQDE20cVqP0nJvsBMs5r9ie9gExyJsGtJ89Y\nbW1RUBkzg19tDTVpzS/R3NFYuODWxS5uU4gDMTyX8rOpb9QmX/hgSDC0EaNvsqjb\nQaDWMMUFJOjIBWZfBCqOpvjXs8Yk+v5rkeca2DKJ7VNPsiOp5X0h8+N9+3YaqPpQ\ntschtAU3uwKBgCoXQbm7YMZ8nA+G2uyJcR8HodCNQFHnyrJhF6TonmFXhTG5t+wa\njzrRePpW6PwjLXN8tP4I8lGW+jHw4655KNF0bycFBX2jObGsmecwsrjKIhaGmcLo\nos4iU2qUlYzvgq2xzftEv7Yo59Mt7zHn3lHTRE9tAsclCP98JVRF+9mPAoGBALnA\nb4Lwwm9/SLoIxt74lucpePj9uSM6vVwjZVOk0SLag+DS5eO/ya+tPZ0KVp5R0U4p\nY94fR53ZVc47x2Ouix/O/qXrPtzXKJ47fxidTEteWIjlD4P42m9g/s4KxJ2AeTHn\nqrqZ5pZfao14+k4GTd0L1U27SeY+LHSdA6m5xHKhAoGBANmHnCM6pm/JHiimc09Y\nI6J7IcUs8qy8mq9iH0/9Ioz5bABoz+4G7LkkEGZHw+UnvTa9Y9qD4oY12JsKUMmJ\numXQe/ZVie/b7ALagdgg7Fi3K+2jIVNRYfW8jU4iKUWC4XImh20Mrrd9SLiFywqp\n9K7DM/TzWWn1N3TDomP0sMvW\n-----END PRIVATE KEY-----\n"
+
+FIREBASE_CLIENT_EMAIL=firebase-adminsdk-fbsvc@cyber-academy-dbd0f.iam.gserviceaccount.com
+FIREBASE_CLIENT_ID=1150524899662283250
+
+# ── CORS ─────────────────────────────────────────────────────
+CLIENT_ORIGIN=http://localhost:3000
+
+# ── REMOVED (no longer needed) ───────────────────────────────
+# MONGO_URI       ← deleted, using Firestore now
+# JWT_SECRET      ← deleted, Firebase Auth handles tokens
+# JWT_EXPIRES_IN  ← deleted
